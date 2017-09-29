@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.lijian.ble_demo">
 
+    <!--检查蓝牙是否打开, 需要此权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <!--要想进行扫描，必须有此权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 为了解决这个异常：java.lang.SecurityException: Need ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission to get scan results-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
