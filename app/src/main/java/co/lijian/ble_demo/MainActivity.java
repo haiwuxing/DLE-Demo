@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     private boolean mScanning;
-    private Handler mHandler;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
 
@@ -26,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mHandler = new Handler(); // 用于延时结束扫描
 
         checkBle();
 
@@ -64,15 +61,6 @@ public class MainActivity extends AppCompatActivity {
     // 开始扫描
     private void scanLeDevice(final boolean enable) {
         if (enable) {
-            // Stops scanning after a pre-defined scan period.
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "延时结束，即将停止扫描");
-                    mScanning = false;
-                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                }
-            }, SCAN_PERIOD);
             Log.d(TAG, "开始扫描");
             mScanning = true;
             mBluetoothAdapter.startLeScan(mLeScanCallback);
